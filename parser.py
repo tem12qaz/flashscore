@@ -177,7 +177,7 @@ class Parser:
             while self.start > time.time():
                 await asyncio.sleep(1)
             self.loop.create_task(self.reload_score_wrapper(game))
-            await asyncio.sleep(0.1)
+            await asyncio.sleep(0.2)
             i += 1
 
         while len(self.games) > len(self.errors):

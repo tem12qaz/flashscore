@@ -9,10 +9,10 @@ from asyncio import AbstractEventLoop
 import aiohttp
 import xlsxwriter as xlsxwriter
 from aiohttp import ClientConnectorError
-from games import  collected_games
+from games import collected_games
 
 import db
-from games_not_recorded import gms
+# from games_not_recorded import gms
 from get_info import get_info
 from get_match_score import get_score
 from get_odds import get_odds

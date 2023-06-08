@@ -9,7 +9,7 @@ from asyncio import AbstractEventLoop
 import aiohttp
 import xlsxwriter as xlsxwriter
 from aiohttp import ClientConnectorError
-from games import  collected_games
+# from games import  collected_games
 
 import db
 from games_not_recorded import gms
@@ -45,26 +45,26 @@ class Parser:
             cls.instance.connections_errors = {}
             cls.instance.loop: AbstractEventLoop = None
 
-            cls.instance.proxies = [
-                ("95.164.110.247", "9698", "bRThFf", "8BG6G3"),
-                ("95.164.111.210", "9074", "bRThFf", "8BG6G3"),
-                ("95.164.111.233", "9366", "bRThFf", "8BG6G3"),
-                ("168.80.24.183", "8000", "uS8XJB", "MgSNbp"),
-                ("168.80.25.190", "8000", "uS8XJB", "MgSNbp"),
-            ]
+            # cls.instance.proxies = [
+            #     ("95.164.110.247", "9698", "bRThFf", "8BG6G3"),
+            #     ("95.164.111.210", "9074", "bRThFf", "8BG6G3"),
+            #     ("95.164.111.233", "9366", "bRThFf", "8BG6G3"),
+            #     ("168.80.24.183", "8000", "uS8XJB", "MgSNbp"),
+            #     ("168.80.25.190", "8000", "uS8XJB", "MgSNbp"),
+            # ]
 
         return cls.instance
 
-    def shift_proxy(self):
-        proxy = self.proxies.pop(0)
-        self.proxies.append(proxy)
-        return proxy
-
-    def get_proxies(self) -> tuple[str, aiohttp.BasicAuth]:
-        proxy_tuple = self.shift_proxy()
-        proxy = f'http://{proxy_tuple[0]}:{proxy_tuple[1]}'
-        proxy_auth = aiohttp.BasicAuth(proxy_tuple[2], proxy_tuple[3])
-        return proxy, proxy_auth
+    # def shift_proxy(self):
+    #     proxy = self.proxies.pop(0)
+    #     self.proxies.append(proxy)
+    #     return proxy
+    #
+    # def get_proxies(self) -> tuple[str, aiohttp.BasicAuth]:
+    #     proxy_tuple = self.shift_proxy()
+    #     proxy = f'http://{proxy_tuple[0]}:{proxy_tuple[1]}'
+    #     proxy_auth = aiohttp.BasicAuth(proxy_tuple[2], proxy_tuple[3])
+    #     return proxy, proxy_auth
 
     async def parse_game_wrapper(self, game):
         try:
@@ -128,7 +128,7 @@ class Parser:
             self.errors[game] = e
 
     async def parse_game(self, game):
-        proxy, proxy_auth = self.get_proxies()
+        proxy, proxy_auth = None, None
         print(proxy)
         result = {'event_id': game}
         try:
@@ -310,4 +310,4 @@ if __name__ == '__main__':
     parser = Parser(games_=gms)
     loop = asyncio.new_event_loop()
     parser.loop = loop
-    loop.run_until_complete(parser.write())
+    loop.run_until_complete(parser.run())

@@ -1,5 +1,5 @@
 IP = '127.0.0.1'
-PG_PASSWORD = 'mmlp2!XComing'
-PG_USER = 'postgres'
+PG_PASSWORD = '3278hjhdsp21'
+PG_USER = 'myuser'
 PG_DATABASE = 'flashscore'
 database_uri = f'postgres://{PG_USER}:{PG_PASSWORD}@{IP}/{PG_DATABASE}'

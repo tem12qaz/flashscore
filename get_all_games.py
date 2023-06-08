@@ -24,7 +24,7 @@ async def get_games_of_year(year: str):
             await asyncio.sleep(2)
         async with aiohttp.ClientSession() as session:
             resp = await session.get(
-                url=f'https://www.flashscorekz.com{year}'
+                url=f'https://www.flashscore.com{year}'
             )
             resp = await resp.text()
         result = parse.findall('¬~AA÷{}¬AD', resp)

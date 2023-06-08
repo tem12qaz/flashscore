@@ -12,11 +12,11 @@ day month year time tour tour2 step p1 p2 r1 r2 score1 score2 status alltime tim
 
 async def get_score(game: str, proxy = None, proxy_auth = None) -> dict:
     headers = {
-        'authority': 'd.flashscorekz.com',
+        'authority': 'd.flashscore.com',
         'accept': '*/*',
         'accept-language': 'ru-RU,ru;q=0.9,en-US;q=0.8,en;q=0.7',
-        'origin': 'https://www.flashscorekz.com',
-        'referer': 'https://www.flashscorekz.com/',
+        'origin': 'https://www.flashscore.com',
+        'referer': 'https://www.flashscore.com/',
         'sec-ch-ua': '"Chromium";v="112", "Google Chrome";v="112", "Not:A-Brand";v="99"',
         'sec-ch-ua-mobile': '?0',
         'sec-ch-ua-platform': '"Windows"',
@@ -28,7 +28,7 @@ async def get_score(game: str, proxy = None, proxy_auth = None) -> dict:
     }
     async with aiohttp.ClientSession() as session:
         resp = await session.get(
-            url=f'https://d.flashscorekz.com/x/feed/df_sur_1_{game}',
+            url=f'https://d.flashscore.com/x/feed/df_sur_1_{game}',
             headers=headers,
             proxy=proxy,
             proxy_auth=proxy_auth
@@ -37,6 +37,7 @@ async def get_score(game: str, proxy = None, proxy_auth = None) -> dict:
 
     # print(resp)
     result = parse_score(resp)
+    # print(result)
     # print(result)
     return result
 
@@ -60,13 +61,13 @@ def parse_score(score_str: str) -> dict:
         data = parse.search(fmt, set_ + '$')
         if not data:
             fmt = 'B{:w}÷{p1:d}¬D{:w}÷{tp1:d}¬B{:w}÷{p2:d}¬D{:w}÷{tp2:d}¬R{:w}÷{time}$'.replace(
+                'tp1', f'team_1_set_{i}_break'
+            ).replace(
+                'tp2', f'team_2_set_{i}_break'
+            ).replace(
                 'p1', f'team_1_set_{i}'
             ).replace(
                 'p2', f'team_2_set_{i}'
-            ).replace(
-                'tp1', f'team_2_set_{i}_break'
-            ).replace(
-                'tp2', f'team_2_set_{i}_break'
             ).replace(
                 'time', f'set_{i}_time'
             )
@@ -80,13 +81,13 @@ def parse_score(score_str: str) -> dict:
                 data = parse.search(fmt, set_ + '$')
                 if not data:
                     fmt = 'B{:w}÷{p1:d}¬D{:w}÷{tp1:d}¬B{:w}÷{p2:d}¬D{:w}÷{tp2:d}$'.replace(
+                        'tp1', f'team_1_set_{i}_break'
+                    ).replace(
+                        'tp2', f'team_2_set_{i}_break'
+                    ).replace(
                         'p1', f'team_1_set_{i}'
                     ).replace(
                         'p2', f'team_2_set_{i}'
-                    ).replace(
-                        'tp1', f'team_2_set_{i}_break'
-                    ).replace(
-                        'tp2', f'team_2_set_{i}_break'
                     )
                     data = parse.search(fmt, set_ + '$')
 
@@ -104,4 +105,4 @@ def parse_score(score_str: str) -> dict:
 if __name__ == '__main__':
     loop = asyncio.new_event_loop()
     # loop.run_until_complete(get_score('fLryUxQB'))
-    loop.run_until_complete(get_score('Wd46FjTl'))
+    loop.run_until_complete(get_score('hjHLsKP3'))

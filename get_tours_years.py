@@ -19,7 +19,7 @@ async def get_years_of_tour(tour: str):
     try:
         async with aiohttp.ClientSession() as session:
             resp = await session.get(
-                url=f'https://www.flashscorekz.com{tour}archive/'
+                url=f'https://www.flashscore.com{tour}archive/'
             )
             resp = await resp.text()
         soup = bs4(resp, 'html.parser')

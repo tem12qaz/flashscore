@@ -13,7 +13,7 @@ from status_dict import statuses
 async def get_info(game: str, proxy=None, proxy_auth=None) -> dict:
     async with aiohttp.ClientSession() as session:
         resp = await session.get(
-            url=f'https://www.flashscorekz.com/match/{game}/#/match-summary/match-summary',
+            url=f'https://www.flashscore.com/match/{game}/#/match-summary/match-summary',
             proxy=proxy,
             proxy_auth=proxy_auth
         )

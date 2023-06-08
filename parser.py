@@ -9,7 +9,7 @@ from asyncio import AbstractEventLoop
 import aiohttp
 import xlsxwriter as xlsxwriter
 from aiohttp import ClientConnectorError
-# from games import  collected_games
+from games import  collected_games
 
 import db
 from games_not_recorded import gms
@@ -307,7 +307,7 @@ class Parser:
 
 
 if __name__ == '__main__':
-    parser = Parser(games_=gms)
+    parser = Parser(games_=collected_games)
     loop = asyncio.new_event_loop()
     parser.loop = loop
     loop.run_until_complete(parser.run())

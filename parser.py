@@ -198,7 +198,7 @@ class Parser:
             while self.start > time.time():
                 await asyncio.sleep(1)
             self.loop.create_task(self.parse_game_wrapper(game))
-            await asyncio.sleep(0.1)
+            await asyncio.sleep(0.01)
 
         while len(self.games) > len(self.errors):
             await asyncio.sleep(4)
@@ -263,7 +263,7 @@ class Parser:
     def log(self):
         OK = Colors.OKGREEN +'OK' + Colors.ENDC
         WAIT = Colors.WARNING +'WAIT' + Colors.ENDC
-        os.system('cls')
+        os.system('clear')
         print(f'''
 {Colors.HEADER}GAMES:{Colors.ENDC} {len(self.games)}
 
